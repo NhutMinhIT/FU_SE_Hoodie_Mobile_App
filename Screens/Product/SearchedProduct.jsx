@@ -13,6 +13,9 @@ const SearchedProduct = (props) => {
                     productsFiltered.map((item) => (
 
                         <Box
+                            onPress={() =>
+                                props.navigation.navigate("Product Detail", { item: item })
+                            }
                             key={item._id}
                             avatar
                         >

@@ -91,7 +91,9 @@ const ProductContainer = (props) => {
 
             </Box>
             {focus == true ? (
-                <SearchedProduct productsFiltered={productsFiltered} />
+                <SearchedProduct
+                    navigation={props.navigation}
+                    productsFiltered={productsFiltered} />
             ) : (
                 <ScrollView >
 
@@ -109,9 +111,9 @@ const ProductContainer = (props) => {
                         <View style={styles.listContainer}>
                             {productsCtg.map((item) => {
                                 return (
-
                                     <ProductList
-                                        key={item._id.$oid}
+                                        navigation={props.navigation}
+                                        key={item._id}
                                         item={item}
                                     />
                                 )
