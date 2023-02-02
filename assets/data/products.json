@@ -1,0 +1,105 @@
+[{
+        "_id": {
+            "$oid": "5f15d8852a025143f9593a7c"
+        },
+        "image": "https://product.hstatic.net/1000086163/product/cnb013_29cd7e00a4d744f0a050d5381604f3fa.jpg",
+        "brand": "PS3",
+        "price": 250,
+        "rating": 1,
+        "numReviews": 0,
+        "isFeatured": true,
+        "name": "BullAnt Hoodie",
+        "description": "Áo Hoodie 3D cao cấp BullAnt - Áo Hoodie nam in toàn bộ thân áo chất liệu nỉ cao cấp, in họa tiết cannabis",
+        "category": {
+            "$oid": "5f15d5cdcb4a6642bddc0fe9e"
+        },
+        "countInStock": 25,
+        "__v": 0
+    }, {
+        "_id": {
+            "$oid": "5f15d92ee520d44421ed8e9b"
+        },
+        "image": "https://cf.shopee.vn/file/54a5c8d8b33e5a305fea2846a7b652ae",
+        "brand": "IKEA",
+        "price": 350.9,
+        "rating": 5,
+        "numReviews": 0,
+        "isFeatured": true,
+        "name": "Three Hundred Basic Hoodie",
+        "description": "Three Hundred Basic Hoodie In Acid Washed Grey",
+        "category": {
+            "$oid": "5f15d5b7cb4a6642bddc0fe8"
+        },
+        "countInStock": 10,
+        "__v": 0
+    }, {
+        "_id": {
+            "$oid": "5f15d964e520d44421ed8e9c"
+        },
+        "image": "https://bizweb.dktcdn.net/100/287/440/products/hoodie-co-non-dep.png?v=1609755836980",
+        "brand": "OBI",
+        "price": 1350.9,
+        "rating": 5,
+        "numReviews": 0,
+        "isFeatured": true,
+        "name": "Cotton DAVIES BRAND",
+        "description": "Áo khoác hoodie nữ local brand Davies - Basic Hoodie Cotton DAVIES BRAND ®",
+        "category": {
+            "$oid": "5f15d5b7cb4a6642bddc0fe8"
+        },
+        "countInStock": 10,
+        "__v": 0
+    }, {
+        "_id": {
+            "$oid": "5f15d9b3e520d44421ed8e9d"
+        },
+        "image": "https://cf.shopee.sg/file/sg-11134201-22110-0ie1st2bfljv6f",
+        "brand": "OBI",
+        "price": 490.9,
+        "rating": 5,
+        "numReviews": 0,
+        "isFeatured": true,
+        "name": "Pullover Hoodies",
+        "description": "Pullover Hoodies - Prices and Deals - Jan 2023 | Shopee Singapore",
+        "category": {
+            "$oid": "5f15d5b7cb4a6642bddc0fe8"
+        },
+        "countInStock": 5,
+        "__v": 0
+    }, {
+        "_id": {
+            "$oid": "5f15da13e520d44421ed8e9e"
+        },
+        "image": "https://wakefitdev.gumlet.io/img/sofa-sets/lifestyle/WSFABLZN3FVBL.jpg",
+        "brand": "Mobilix",
+        "price": 1000,
+        "rating": 5,
+        "numReviews": null,
+        "isFeatured": true,
+        "name": "Sofa",
+        "description": "Big Sofa for living room",
+        "category": {
+            "$oid": "5f15d5b2cb4a6642bddc0fe7"
+        },
+        "countInStock": 2,
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "5f15da13e520d44421ed8e9e"
+        },
+        "image": "https://wakefitdev.gumlet.io/img/sofa-sets/lifestyle/WSFABLZN3FVBL.jpg",
+        "brand": "Mobilix",
+        "price": 1000,
+        "rating": 5,
+        "numReviews": null,
+        "isFeatured": true,
+        "name": "Sofa",
+        "description": "Big Sofa for living room",
+        "category": {
+            "$oid": "5f15d5b2cb4a6642bddc0fe7"
+        },
+        "countInStock": 2,
+        "__v": 0
+    }
+]
