@@ -12,13 +12,15 @@ const Main = () => {
             tabBarOptions={{
                 keyboardHidesTabBar: true,
                 showLabel: false,
-                activeTintColor: "#e91e63",
+                activeTintColor: "#edb81a",
             }}
         >
             <Tab.Screen
                 name="Home"
                 component={HomeNavigator}
+
                 options={{
+                    headerShown: false,
                     tabBarIcon: ({ color }) => (
                         <Icon name="home"
                             style={{ position: 'relative' }}
@@ -30,8 +32,10 @@ const Main = () => {
             />
             <Tab.Screen
                 name="Cart"
+
                 component={HomeNavigator}
                 options={{
+                    headerShown: false,
                     tabBarIcon: ({ color }) => (
                         <Icon name="shopping-cart"
                             style={{ position: 'relative' }}
@@ -43,8 +47,10 @@ const Main = () => {
             />
             <Tab.Screen
                 name="Admin"
+
                 component={HomeNavigator}
                 options={{
+                    headerShown: false,
                     tabBarIcon: ({ color }) => (
                         <Icon name="cog"
                             color={color}
@@ -57,6 +63,7 @@ const Main = () => {
                 name="User"
                 component={HomeNavigator}
                 options={{
+                    headerShown: false,
                     tabBarIcon: ({ color }) => (
                         <Icon name="user"
                             color={color}

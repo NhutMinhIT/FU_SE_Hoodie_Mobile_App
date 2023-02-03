@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         alignItems: 'center',
         elevation: 8,
-        backgroundColor: 'white'
+        backgroundColor: '#d1cec5'
     },
     image: {
         width: width / 2 - 20 - 10,

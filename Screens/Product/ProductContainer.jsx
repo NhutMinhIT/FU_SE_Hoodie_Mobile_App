@@ -75,9 +75,8 @@ const ProductContainer = (props) => {
 
     return (
 
-        <View style={{ marginTop: 30 }}>
-            <Box>
-
+        <View style={{ marginTop: 30, backgroundColor: '#f5f2eb' }} >
+            <Box background={'white'}>
                 <Input w={{
                     base: "100%",
                     md: "10%",
@@ -91,7 +90,9 @@ const ProductContainer = (props) => {
 
             </Box>
             {focus == true ? (
-                <SearchedProduct productsFiltered={productsFiltered} />
+                <SearchedProduct
+                    navigation={props.navigation}
+                    productsFiltered={productsFiltered} />
             ) : (
                 <ScrollView >
 
@@ -111,7 +112,8 @@ const ProductContainer = (props) => {
                                 return (
 
                                     <ProductList
-                                        key={item._id.$oid}
+                                        navigation={props.navigation}
+                                        key={item._id}
                                         item={item}
                                     />
                                 )
@@ -136,7 +138,7 @@ const ProductContainer = (props) => {
 const styles = StyleSheet.create({
     container: {
         flexWrap: "wrap",
-        backgroundColor: "gainsboro",
+        backgroundColor: "#f5f2eb",
         paddingBottom: 120
     },
     listContainer: {
@@ -145,7 +147,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "flex-start",
         flexWrap: "wrap",
-        backgroundColor: "gainsboro",
+        backgroundColor: "#f5f2eb",
     },
     center: {
         justifyContent: 'center',
@@ -153,4 +155,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ProductContainer; ``
+export default ProductContainer; 

@@ -8,7 +8,7 @@ const CategoryFilter = (props) => {
         <ScrollView
             bounces={true}
             horizontal={true}
-            style={{ backgroundColor: "#f2f2f2" }}
+            style={{ backgroundColor: "#f5f2eb" }}
         >
             <View style={{ margin: 0, padding: 0, borderRadius: 0 }}>
 
@@ -43,7 +43,7 @@ const CategoryFilter = (props) => {
                         <Badge
                             style={[styles.center,
 
-                            { margin: 5 },
+                            { margin: 5 }, { flexDirection: 'row' },
                             props.active == props.categories.indexOf(item) ? styles.active
                                 : styles.inactive]}
                         >
@@ -62,9 +62,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
+        backgroundColor: '#f5f2eb',
+
     },
     active: {
-        backgroundColor: '#f7cd92'
+        backgroundColor: '#f7cd92',
     },
     inactive: {
         backgroundColor: '#a0e1eb'
