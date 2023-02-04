@@ -23,13 +23,13 @@ const SingleProduct = (props) => {
                 <View style={styles.contentContainer}>
                     <Heading style={styles.contentHeader}>{item.name}</Heading>
                     <Text style={styles.contentText}>{item.brand}</Text>
-                    <Text style={styles.contentText}>{item.description}</Text>
                 </View>
+                <Text style={styles.desc}>{item.description}</Text>
+
             </ScrollView>
             <Stack>
                 <View style={styles.bottomContainer}>
                     <Text style={styles.price}>{item.price}$</Text>
-
                 </View>
                 <View style={styles.button}>
                     <Button backgroundColor={'orange.600'}>Add</Button>
@@ -45,17 +45,18 @@ const styles = StyleSheet.create({
     container: {
         position: 'relative',
         height: '100%',
+        backgroundColor: '#f5f2eb'
 
     },
     imageContainer: {
-        backgroundColor: '#f5f2eb',
+        //backgroundColor: '#f5f2eb',
         padding: 0,
         margin: 0
     },
     image: {
         width: '100%',
         height: 200,
-        marginTop: 10,
+        marginTop: 15,
     },
     contentContainer: {
         marginTop: 20,
@@ -71,6 +72,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 20
     },
+    desc: {
+        fontStyle: "italic",
+        fontWeight: "300"
+    },
     bottomContainer: {
         flexDirection: 'column',
         position: 'absolute',
@@ -78,9 +83,11 @@ const styles = StyleSheet.create({
         left: 0,
     },
     price: {
-        fontSize: 20,
-        margin: 20,
-        color: 'red',
+        fontSize: 30,
+        marginBottom: 20,
+        marginLeft: 10,
+        color: '#0af769',
+        fontWeight: '700'
 
     },
     button: {

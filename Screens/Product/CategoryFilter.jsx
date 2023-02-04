@@ -10,49 +10,54 @@ const CategoryFilter = (props) => {
             horizontal={true}
             style={{ backgroundColor: "#f5f2eb" }}
         >
-            <View style={{ margin: 0, padding: 0, borderRadius: 0 }}>
-
-                <TouchableOpacity
-                    key={1}
-                    onPress={() => {
-                        props.categoryFilter('all'), props.setActive(-1)
-                    }}
-                >
-
-                    <Badge
-                        style={[styles.center, { margin: 5 },
-                        props.active == -1 ? styles.active : styles.inactive
-                        ]}
-                    >
-
-                        <Text style={{ color: 'white' }}>All</Text>
-                    </Badge>
-
-
-                </TouchableOpacity>
-
-                {props.categories.map((item) => (
+            <HStack>
+                <View style={{ margin: 0, padding: 0, borderRadius: 0, flexDirection: 'row' }}>
 
                     <TouchableOpacity
-                        key={item._id}
+                        key={1}
                         onPress={() => {
-                            props.categoryFilter(item._id),
-                                props.setActive(props.categories.indexOf(item))
+                            props.categoryFilter('all'), props.setActive(-1)
                         }}
                     >
-                        <Badge
-                            style={[styles.center,
+                        <HStack>
+                            <Badge
+                                style={[styles.center, { margin: 5 },
+                                props.active == -1 ? styles.active : styles.inactive
+                                ]}
+                            >
 
-                            { margin: 5 }, { flexDirection: 'row' },
-                            props.active == props.categories.indexOf(item) ? styles.active
-                                : styles.inactive]}
-                        >
-                            <Text style={{ color: 'white' }}>{item.name}</Text>
-                        </Badge>
+                                <Text style={{ color: 'white' }}>All</Text>
+                            </Badge>
+                        </HStack>
+
+
                     </TouchableOpacity>
 
-                ))}
-            </View>
+                    {props.categories.map((item) => (
+
+                        <TouchableOpacity
+                            key={item._id}
+                            onPress={() => {
+                                props.categoryFilter(item._id),
+                                    props.setActive(props.categories.indexOf(item))
+                            }}
+                        >
+                            <VStack>
+                                <Badge
+                                    style={[styles.center,
+
+                                    { margin: 5 },
+                                    props.active == props.categories.indexOf(item) ? styles.active
+                                        : styles.inactive]}
+                                >
+                                    <Text style={{ color: 'white' }}>{item.name}</Text>
+                                </Badge>
+                            </VStack>
+                        </TouchableOpacity>
+
+                    ))}
+                </View>
+            </HStack>
         </ScrollView >
     )
 }

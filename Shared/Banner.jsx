@@ -9,9 +9,11 @@ const Banner = () => {
 
     useEffect(() => {
         setBanner([
-            "https://cdn.shopify.com/s/files/1/0696/8411/collections/Method_Hoodies_Banner_2000x.jpg",
+            'https://images.workngear.com/images/MediaContents/CategoryBannerMediaContents/OuterWear-PLP-MediaContents/Outerwear_Sweatshirts_Hoodies_Banner_m540031.jpg',
+
             'https://cumbriasu.universityhoodies.org/Images/BannerUCSU%20Banner.png',
-            'http://file.hstatic.net/1000253775/collection/banner_sp_t10.2019__10__8c9f634ff6fe4a7bbdb0af31342f17c6.jpg'])
+            'https://cdn.shopify.com/s/files/1/0390/3389/files/hoodie_banner.jpg?16918640409251603638',
+            'https://img.meta.com.vn/Data/image/2022/03/02/banner-8-3-37.JPG'])
 
         return () => {
             setBanner([])
