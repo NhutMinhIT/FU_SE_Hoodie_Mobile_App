@@ -41,9 +41,9 @@ const Banner = () => {
                             );
                         })}
                     </Swiper>
-                    <View style={{ height: 20 }}>
+                    {/* <View style={{ height: 20 }}>
 
-                    </View>
+                    </View> */}
                 </View>
             </View >
         </ScrollView>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     swiper: {
         width: width,
         alignItems: 'center',
-        marginTop: 10
+        marginTop: 0
     },
     imageBanner: {
         height: width / 2,

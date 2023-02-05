@@ -75,7 +75,7 @@ const ProductContainer = (props) => {
 
     return (
 
-        <View style={{ marginTop: 30, backgroundColor: '#f5f2eb' }} >
+        <View style={{ marginTop: 0, backgroundColor: '#f5f2eb' }} >
             <Box background={'white'}>
                 <Input w={{
                     base: "100%",

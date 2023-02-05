@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
     price: {
         fontSize: 20,
         color: 'orange',
-        marginTop: 10
+        marginTop: 10,
+        fontWeight: '700'
     }
 })
 export default ProductCard;

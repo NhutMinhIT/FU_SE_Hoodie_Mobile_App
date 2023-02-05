@@ -29,7 +29,7 @@ const SingleProduct = (props) => {
             </ScrollView>
             <Stack>
                 <View style={styles.bottomContainer}>
-                    <Text style={styles.price}>{item.price}$</Text>
+                    <Text style={styles.price}>${item.price}</Text>
                 </View>
                 <View style={styles.button}>
                     <Button backgroundColor={'orange.600'}>Add</Button>
