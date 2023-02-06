@@ -29,7 +29,7 @@ const Login = () => {
             </View>
             <TouchableOpacity>
                 <Text style={styles.forgotBtn}>Forgot Password?</Text>
-                <Text style={styles.forgotBtn}>Create Account</Text>
+                <Text style={styles.forgotBtn}>Create New Account</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.loginBtn}>
                 <Text style={styles.loginText}>LOGIN</Text>
