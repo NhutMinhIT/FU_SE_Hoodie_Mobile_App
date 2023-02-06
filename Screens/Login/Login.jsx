@@ -40,7 +40,7 @@ const Login = () => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 100,
+        paddingTop: 98,
         // backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center",
