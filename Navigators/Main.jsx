@@ -4,6 +4,7 @@ import { View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome"
 const Tab = createBottomTabNavigator();
 import HomeNavigator from "./HomeNavigator";
+import Login from "../Screens/Login/Login";
 
 const Main = () => {
     return (
@@ -61,7 +62,7 @@ const Main = () => {
             />
             <Tab.Screen
                 name="User"
-                component={HomeNavigator}
+                component={Login}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ color }) => (
