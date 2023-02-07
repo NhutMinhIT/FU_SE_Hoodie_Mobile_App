@@ -11,7 +11,7 @@ const cartItems = (state = [], action) => {
             return [...state, action.payload];
             //remove ro cart
         case REMOVE_TO_CART:
-            return state.filter(cartItems => cartItems !== action.payload);
+            return state.filter(cartItem => cartItem !== action.payload);
             //clear cart
         case CLEAR_CART:
             return state = []
