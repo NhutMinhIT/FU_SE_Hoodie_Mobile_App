@@ -7,6 +7,8 @@ import HomeNavigator from "./HomeNavigator";
 import CartNavigator from "./CartNavigator";
 import Login from "../Screens/Login/Login";
 
+import CartIcon from "../Shared/CartIcon";
+
 const Main = () => {
     return (
         <Tab.Navigator
@@ -34,16 +36,18 @@ const Main = () => {
             />
             <Tab.Screen
                 name="Cart"
-
                 component={CartNavigator}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ color }) => (
-                        <Icon name="shopping-cart"
-                            style={{ position: 'relative' }}
-                            color={color}
-                            size={30}
-                        />
+                        <View>
+                            <Icon name="shopping-cart"
+                                style={{ position: 'relative' }}
+                                color={color}
+                                size={30}
+                            />
+                            <CartIcon />
+                        </View>
                     ),
                 }}
             />
