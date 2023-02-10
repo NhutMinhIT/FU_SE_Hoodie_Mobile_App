@@ -1,6 +1,6 @@
 import {
     ADD_TO_CART,
-    REMOVE_TO_CART,
+    REMOVE_FROM_CART,
     CLEAR_CART
 } from '../constants'
 
@@ -10,7 +10,7 @@ const cartItems = (state = [], action) => {
         case ADD_TO_CART:
             return [...state, action.payload];
             //remove ro cart
-        case REMOVE_TO_CART:
+        case REMOVE_FROM_CART:
             return state.filter(cartItem => cartItem !== action.payload);
             //clear cart
         case CLEAR_CART:

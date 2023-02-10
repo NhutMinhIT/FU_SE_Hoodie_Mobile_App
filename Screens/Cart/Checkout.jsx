@@ -1,9 +1,9 @@
+import { Text } from 'native-base'
 import React from 'react'
 
 const Checkout = () => {
     return (
-        <div>Checkout</div>
-    )
+        <Text>NhutMinh</Text>)
 }
 
 export default Checkout

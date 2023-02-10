@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Image, View, StyleSheet, Text, ScrollView } from "react-native";
 import { HStack, VStack, Container, Heading, Stack, Box, Button } from "native-base";
 
+import { connect } from 'react-redux'
+import * as actions from '../../Redux/Actions/cartActions'
+
 const SingleProduct = (props) => {
     const [item, setItem] = useState(props.route.params.item);
     const [availability, setAvailability] = useState('')
@@ -32,7 +35,13 @@ const SingleProduct = (props) => {
                     <Text style={styles.price}>${item.price}</Text>
                 </View>
                 <View style={styles.button}>
-                    <Button backgroundColor={'orange.600'}>Add</Button>
+                    <Button
+
+                        color={'green'}
+                        onPress={() => {
+                            props.addItemToCart(item)
+                        }}
+                    >Add</Button>
                 </View>
             </Stack>
 
@@ -40,6 +49,14 @@ const SingleProduct = (props) => {
     )
 
 }
+// ADD TO CART
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItemToCart: (product) =>
+            dispatch(actions.addToCart({ quantity: 1, product }))
+    }
+}
+
 
 const styles = StyleSheet.create({
     container: {
@@ -107,4 +124,4 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     }
 })
-export default SingleProduct;
+export default connect(null, mapDispatchToProps)(SingleProduct);
