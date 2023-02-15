@@ -52,7 +52,6 @@ const Payment = (props) => {
                             <HStack>
                                 <Text onPress={() => setSelected(item.value)} key={item.name}>{item.name}</Text>
                             </HStack>
-
                             <Radio selected={selected == item.value} />
 
                         </Stack>
