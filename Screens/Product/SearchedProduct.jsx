@@ -33,7 +33,10 @@ const SearchedProduct = (props) => {
                                     style={{ marginTop: '5%' }}
                                     onPress={() => {
                                         navigation.navigate("Product Details", { item: item })
-                                    }}
+
+                                    }
+
+                                    }
                                 />
 
                                 <VStack style={{ marginBottom: '10%', marginTop: '5%' }}>
