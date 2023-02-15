@@ -7,9 +7,13 @@ Project Mobile with React-Native (frontend). Backend (nodejs, expressjs, mongose
 * https://nodejs.org/en/
 
 ## Clone the frontend code repository
-
 * git clone https://github.com/NhutMinhIT/Hoodie_Application.git
 
-## Run Project 
+## checkout branch Master or dev
+* git checkout master/dev
 
+## Install Node_Modules
+* npm i
+
+## Run Project 
 * npm run start/yarn run start
