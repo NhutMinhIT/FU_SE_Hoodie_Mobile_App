@@ -9,6 +9,10 @@ import SearchedProduct from './SearchedProduct';
 import Banner from '../../Shared/Banner';
 import CategoryFilter from './CategoryFilter';
 
+//API
+import baseURL from '../../assets/common/baseUrl';
+import axios from 'axios';
+
 const data = require('../../assets/data/products.json')
 const productsCategories = require('../../assets/data/categories.json')
 
@@ -26,14 +30,32 @@ const ProductContainer = (props) => {
     const [initialState, setInitialState] = useState([])
 
     useEffect(() => {
-        setProducts(data)
-        setProductsFiltered(data)
+
         setFocus(false)
         //categories
-        setCategories(productsCategories)
-        setProductsCtg(data)
         setActive(-1)
-        setInitialState(data)
+
+        //fetch API PRODUCT
+        axios
+            .get(`${baseURL}products`)
+            .then((res) => {
+                setProducts(res.data);
+                setProductsFiltered(res.data);
+                setProductsCtg(res.data);
+                setInitialState(res.data);
+            })
+            .catch((error) => {
+                console.log('API CALL ERROR')
+            })
+        // FEACT API CATEGORY 
+        axios
+            .get(`${baseURL}categories`)
+            .then((res) => {
+                setCategories(res.data)
+            })
+            .catch((error) => {
+                console.log('API CALL ERROR')
+            })
 
         return () => {
             setProducts([])
@@ -66,7 +88,7 @@ const ProductContainer = (props) => {
                 ? [setProductsCtg(initialState), setActive(true)]
                 : [
                     setProductsCtg(
-                        products.filter((i) => i.category.$oid === ctg),
+                        products.filter((i) => i.category._id === ctg),
                         setActive(true)
                     ),
                 ];
