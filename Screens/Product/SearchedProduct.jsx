@@ -9,6 +9,7 @@ var { width } = Dimensions.get("window")
 
 const SearchedProduct = (props) => {
     const { productsFiltered } = props;
+
     const navigation = useNavigation();
 
     const { item } = props;
@@ -31,8 +32,11 @@ const SearchedProduct = (props) => {
                                 }}
                                     style={{ marginTop: '5%' }}
                                     onPress={() => {
-                                        props.navigation.navigate("Product Details", { item: item })
-                                    }}
+                                        navigation.navigate("Product Details", { item: item })
+
+                                    }
+
+                                    }
                                 />
 
                                 <VStack style={{ marginBottom: '10%', marginTop: '5%' }}>
