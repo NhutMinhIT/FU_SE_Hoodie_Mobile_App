@@ -40,8 +40,8 @@ const SearchedProduct = (props) => {
                                 />
 
                                 <VStack style={{ marginBottom: '10%', marginTop: '5%' }}>
-                                    <Text>{item.name}</Text>
-                                    <Text note>{item.description}</Text>
+                                    <Text style={{ fontWeight: '700' }}>{item.name}</Text>
+                                    {/* <Text note>{item.description}</Text> */}
                                 </VStack>
                             </HStack>
 
