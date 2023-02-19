@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Image, View, StyleSheet, Text, ScrollView } from "react-native";
-import { HStack, VStack, Container, Heading, Stack, Box, Button } from "native-base";
+import { Heading, Stack, Button } from "native-base";
+import Toast from 'react-native-toast-message'
 
+//REDUX THUNK
 import { connect } from 'react-redux'
 import * as actions from '../../Redux/Actions/cartActions'
 
@@ -39,8 +41,15 @@ const SingleProduct = (props) => {
 
                         color={'green'}
                         onPress={() => {
-                            props.addItemToCart(item)
+                            props.addItemToCart(item),
+                                Toast.show({
+                                    topOffset: 60,
+                                    type: 'success',
+                                    text1: `Added ${item.name} to Card`,
+                                    text2: 'Go to Card to complete order'
+                                })
                         }}
+
                     >Add</Button>
                 </View>
             </Stack>
