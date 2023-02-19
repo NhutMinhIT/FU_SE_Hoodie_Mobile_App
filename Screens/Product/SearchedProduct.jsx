@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, FlatList } from 'react-native'
+import { View, StyleSheet, Dimensions, FlatList, TouchableOpacity } from 'react-native'
 import { Left, Body, ListItem, Thumbnail, Text, Content, VStack, Image, HStack, Avatar, Box, ScrollView } from 'native-base';
 
 //Navigation
@@ -24,25 +24,25 @@ const SearchedProduct = (props) => {
                             avatar
                         >
 
-                            <HStack space={4}>
-                                <Avatar source={{
-                                    uri: item.image ?
-                                        item.image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'
-
-                                }}
-                                    style={{ marginTop: '5%' }}
+                            <HStack>
+                                <TouchableOpacity
+                                    style={{ flexDirection: 'row' }}
                                     onPress={() => {
                                         navigation.navigate("Product Details", { item: item })
+                                    }}>
+                                    <Avatar source={{
+                                        uri: item.image ?
+                                            item.image : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png'
 
-                                    }
+                                    }}
+                                        style={{ marginTop: '5%' }}
+                                    />
 
-                                    }
-                                />
-
-                                <VStack style={{ marginBottom: '10%', marginTop: '5%' }}>
-                                    <Text style={{ fontWeight: '700' }}>{item.name}</Text>
+                                    <Text style={{ fontWeight: '700', marginTop: 30, marginLeft: 20 }}>{item.name}</Text>
                                     {/* <Text note>{item.description}</Text> */}
-                                </VStack>
+
+                                </TouchableOpacity>
+
                             </HStack>
 
                         </View>

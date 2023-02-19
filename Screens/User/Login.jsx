@@ -1,31 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import FormContainer from "../../Shared/Form/FormContainer";
 import Input from "../../Shared/Form/Input";
 import { useNavigation } from '@react-navigation/native';
 
+//ContextAPI 
+import AuthGlobal from "../../Context/store/AuthGlobal";
+import { loginUser } from "../../Context/actions/Auth.actions";
 //import File
 import Error from "../../Shared/Error";
 
 const Login = (props) => {
     const navigation = useNavigation();
+    const context = useContext(AuthGlobal)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+
+
+    useEffect(() => {
+        if (context.stateUser.isAuthenticated === true) {
+            navigation.navigate("User Profile");
+        }
+    }, [context.stateUser.isAuthenticated]);
+
     //Handle Event 
     const handleSubmit = () => {
         const user = {
             email,
-            password
+            password,
         };
 
         if (email === "" || password === "") {
-            setError("Please enter infor of you ! ")
+            setError("Please fill in your credentials");
         } else {
-            console.log('Success !!')
+            loginUser(user, context.dispatch);
         }
-    }
+    };
 
     return (
         <FormContainer title={"Login"}>
