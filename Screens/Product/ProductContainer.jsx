@@ -111,10 +111,10 @@ const ProductContainer = (props) => {
                             base: "100%",
                             md: "10%",
 
-                        }} InputLeftElement={<Icon as={<MaterialIcons name="search" />} size={5} ml="2" color="muted.400" />} placeholder="Search"
+                        }} InputLeftElement={<Icon as={<MaterialIcons name="search" color={'#f5e3cb'} />} size={5} ml="2" />} placeholder="Search"
                             onFocus={openList}
                             onChangeText={(text) => searchProduct(text)}
-
+                            style={{ backgroundColor: '#f5e3cb' }}
                         />
                         {focus == true ? (<MaterialIcons name="close" onPress={onBlur} style={{ position: 'absolute', left: '92%', top: '25%' }} size={20} />) : null}
 
@@ -178,12 +178,13 @@ const styles = StyleSheet.create({
         paddingBottom: 120
     },
     listContainer: {
-        height: height,
+        height: "1%",
         flex: 1,
         flexDirection: "row",
         alignItems: "flex-start",
         flexWrap: "wrap",
         backgroundColor: "#f5f2eb",
+        paddingBottom: 20
     },
     center: {
         justifyContent: 'center',
