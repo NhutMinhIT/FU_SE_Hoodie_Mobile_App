@@ -50,7 +50,6 @@ const Cart = (props) => {
       </View>
       {props.cartItems.length ? (
         <ScrollView>
-
           <SwipeListView
             data={props.cartItems}
             renderItem={(data) => (
