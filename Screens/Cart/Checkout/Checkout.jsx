@@ -88,6 +88,8 @@ const Checkout = (props) => {
                 <Select
                     mode='dropdown'
                     placeholder="Select Your Country"
+                    minWidth="300"
+                    minHeight='15'
                     iosIcon={<Icon name="arrow-down" color={"#007aff"} />}
                     selectedValue={country}
                     placeholderStyle={{ color: '007aff' }}
@@ -119,3 +121,4 @@ const mapStateToProps = (state) => {
     }
 }
 export default connect(mapStateToProps)(Checkout)
+

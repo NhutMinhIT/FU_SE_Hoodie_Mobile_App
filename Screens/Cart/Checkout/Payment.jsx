@@ -50,10 +50,9 @@ const Payment = (props) => {
                     <List>
                         <Stack>
                             <HStack>
-                                <Text onPress={() => setSelected(item.value)} key={item.name}>{item.name}</Text>
+                                <Text onPress={() => setSelected(item.value)} key={item.name} style={{ paddingLeft: 10 }}>{item.name}</Text>
+                                {selected == item.value ? <Text style={{ marginLeft: "auto" }}>✔️</Text> : ""}
                             </HStack>
-                            <Radio selected={selected == item.value} />
-
                         </Stack>
                     </List>
                 )
