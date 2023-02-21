@@ -87,6 +87,8 @@ const Checkout = (props) => {
 
                 <Select
                     mode='dropdown'
+                    minWidth='300'
+                    minHeight='15'
                     placeholder="Select Your Country"
                     iosIcon={<Icon name="arrow-down" color={"#007aff"} />}
                     selectedValue={country}
