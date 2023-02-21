@@ -19,6 +19,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../Redux/Actions/cartActions'
 
 import CartItem from './CartItem';
+import EasyButton from '../../Shared/StyledComponents/EasyButton';
 
 import { useNavigation } from '@react-navigation/native';
 var { height, width } = Dimensions.get('window')
@@ -40,13 +41,21 @@ const Cart = (props) => {
 
         <Text style={styles.price}>${total}</Text>
 
-        <Button title='Clear'
+        <EasyButton
+          medium
+          danger
           onPress={() => props.clearCart()}
-        />
-        <Button title='Checkout'
+        >
+          <Text style={{ color: 'white' }}>Clear</Text>
+        </EasyButton>
+        <EasyButton
+          medium
+          primary
           onPress={() => navigation.navigate("Checkout")
           }
-        />
+        >
+          <Text style={{ color: 'white' }}>Checkout</Text>
+        </EasyButton>
       </View>
       {props.cartItems.length ? (
         <ScrollView>
