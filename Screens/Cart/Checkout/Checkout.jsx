@@ -87,6 +87,8 @@ const Checkout = (props) => {
 
                 <Select
                     mode='dropdown'
+                    minWidth='300'
+                    minHeight='15'
                     placeholder="Select Your Country"
                     minWidth="300"
                     minHeight='15'
