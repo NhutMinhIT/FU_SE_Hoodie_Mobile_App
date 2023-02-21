@@ -90,8 +90,6 @@ const Checkout = (props) => {
                     minWidth='300'
                     minHeight='15'
                     placeholder="Select Your Country"
-                    minWidth="300"
-                    minHeight='15'
                     iosIcon={<Icon name="arrow-down" color={"#007aff"} />}
                     selectedValue={country}
                     placeholderStyle={{ color: '007aff' }}
