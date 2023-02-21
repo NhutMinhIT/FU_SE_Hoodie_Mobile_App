@@ -22,16 +22,18 @@ const UserProfile = (props) => {
             context.stateUser.isAuthenticated === null
         ) {
             props.navigation.navigate("Login")
+        } else {
+            AsyncStorage.getItem("jwt")
+                .then((res) => {
+                    axios
+                        .get(`${baseURL}users/${context.stateUser.user.userId}`, {
+                            headers: { Authorization: `Bearer ${res}` },
+                        })
+                        .then((user) => setUserProfile(user.data))
+                })
+                .catch((error) => console.log(error))
         }
-        AsyncStorage.getItem("jwt")
-            .then((res) => {
-                axios
-                    .get(`${baseURL}users/${context.stateUser.user.sub}`, {
-                        headers: { Authorization: `Bearer ${res}` },
-                    })
-                    .then((user) => setUserProfile(user.data))
-            })
-            .catch((error) => console.log(error))
+
         return () => {
             setUserProfile();
         }
