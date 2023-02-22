@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, Dimensions, StyleSheet, Text } from 'react-native';
 
-var { width } = Dimensions.get('window');
+var { width, height } = Dimensions.get('window');
 
 const FormContainer = (props) => {
     return (
@@ -15,8 +15,9 @@ const FormContainer = (props) => {
 const styles = StyleSheet.create({
     container: {
         marginTop: 30,
-        marginBottom: 200,
+        marginBottom: 500,
         width: width,
+        height: 'auto',
         justifyContent: 'center',
         alignItems: 'center'
     },
