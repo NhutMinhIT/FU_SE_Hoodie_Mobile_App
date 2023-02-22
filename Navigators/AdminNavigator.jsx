@@ -16,7 +16,8 @@ function MyStack() {
                 name="Products"
                 component={Products}
                 options={{
-                    title: 'Products'
+                    title: 'Products',
+                    headerShown: false
                 }}
             />
             <Stack.Screen
