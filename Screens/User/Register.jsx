@@ -22,39 +22,46 @@ const Register = (props) => {
     const [error, setError] = useState("");
 
     const handleRegister = () => {
+
+
         if (email === "" || name === "" || phone === "" || password === "") {
             setError("Please fill in the form correctly");
         }
-        let user = {
-            name: name,
-            email: email,
-            password: password,
-            phone: phone,
-            isAdmin: false
-        };
-        axios
-            .post(`${baseURL}users/register`, user)
-            .then((res) => {
-                if (res.status = 200) {
+        else if (!email.includes('@')) {
+            setError('Please fill in correct email')
+        }
+        else {
+            let user = {
+                name: name,
+                email: email,
+                password: password,
+                phone: phone,
+                isAdmin: false
+            };
+            axios
+                .post(`${baseURL}users/register`, user)
+                .then((res) => {
+                    if (res.status = 200) {
+                        Toast.show({
+                            topOffset: 60,
+                            type: 'success',
+                            text1: 'Register Successfully !!!',
+                            text2: 'Please login into your account !'
+                        })
+                        setTimeout(() => {
+                            navigation.navigate("Login");
+                        }, 500)
+                    }
+                })
+                .catch((error) => {
                     Toast.show({
                         topOffset: 60,
-                        type: 'success',
-                        text1: 'Register Successfully !!!',
-                        text2: 'Please login into your account !'
+                        type: 'error',
+                        text1: 'Something went wrong !',
+                        text2: "Please try again !",
                     })
-                    setTimeout(() => {
-                        navigation.navigate("Login");
-                    }, 500)
-                }
-            })
-            .catch((error) => {
-                Toast.show({
-                    topOffset: 60,
-                    type: 'error',
-                    text1: 'Something went wrong !',
-                    text2: "Please try again !",
-                })
-            });
+                });
+        }
     }
 
 
