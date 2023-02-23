@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     View,
     Text,
@@ -8,6 +8,7 @@ import {
     Platform
 } from 'react-native'
 import { ScrollView, Select } from 'native-base'
+import Icon from "react-native-vector-icons/FontAwesome";
 import Toast from "react-native-toast-message/lib/src/Toast";
 import { MaterialIcons } from "@expo/vector-icons";
 //Custome UI
@@ -38,9 +39,20 @@ const ProductForm = (props) => {
     const [richDescription, setRichDescription] = useState();
     const [numReviews, setNumReviews] = useState(0);
     const [item, setItem] = useState(null);
+
+    useEffect(() => {
+        //Fetch API Categories
+        axios
+            .get(`${baseURL}categories`)
+            .then((res) => setCategories(res.data))
+            .catch((error) => alert('Category Error .....!'))
+        return () => {
+            setCategories([])
+        }
+    }, [])
     return (
 
-        <FormContainer title="ADD NEW PRODUCT">
+        <FormContainer>
             <View>
                 <Image source={{ uri: mainImage }} />
                 <TouchableOpacity>
@@ -98,15 +110,80 @@ const ProductForm = (props) => {
                 value={description}
                 onChangeText={(text) => setDescription(text)}
             />
-        </FormContainer>
+            <Select
+                mode='dropdown'
+                iosIcon={<Icon name="arrow-down" color={"#007aff"} />}
+                style={{ width: undefined }}
+                minWidth='300'
+                minHeight='15'
+                placeholder="Select you Category"
+                selectedValue={pickerValue}
+                placeholderStyle={{ color: '007aff' }}
+                // placeholderTextColor={{ color: '007aff' }}               
+                placeholderIconColor="#007aff"
+                onValueChange={(e) => [setPickerValue(e), setCategory(e)]}
 
+            >
+                {categories.map((c) => {
+                    return <Select.Item
+                        key={c.id}
+                        label={c.name}
+                        value={c.id}
+                    />
+                })}
+            </Select>
+            {err ? <Error message={err} /> : null}
+            <View style={styles.buttonContainer}>
+                <EasyButton
+                    large
+                    primary
+                // onPress={() => addProduct()}
+                >
+                    <Text style={styles.buttonText}>Confirm</Text>
+                </EasyButton>
+            </View>
+        </FormContainer>
     )
 }
 
 const styles = StyleSheet.create({
     label: {
-        width: '80%',
-        marginTop: 10,
+        width: "80%",
+        marginTop: 10
+    },
+    buttonContainer: {
+        width: "80%",
+        marginBottom: 80,
+        marginTop: 20,
+        alignItems: "center"
+    },
+    buttonText: {
+        color: "white"
+    },
+    imageContainer: {
+        width: 200,
+        height: 200,
+        borderStyle: "solid",
+        borderWidth: 8,
+        padding: 0,
+        justifyContent: "center",
+        borderRadius: 100,
+        borderColor: "#E0E0E0",
+        elevation: 10
+    },
+    image: {
+        width: "100%",
+        height: "100%",
+        borderRadius: 100
+    },
+    imagePicker: {
+        position: "absolute",
+        right: 5,
+        bottom: 5,
+        backgroundColor: "grey",
+        padding: 8,
+        borderRadius: 100,
+        elevation: 20
     }
 })
 export default ProductForm;

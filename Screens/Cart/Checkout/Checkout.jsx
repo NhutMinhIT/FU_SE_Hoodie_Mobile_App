@@ -56,7 +56,7 @@ const Checkout = (props) => {
                     placeholder={"Phone"}
                     name={"phone"}
                     value={phone}
-                    keyboardType={"numberic"}
+                    keyboardType={"numeric"}
                     onChangeText={(text) => setPhone(text)}
                 />
                 <Input
@@ -81,7 +81,7 @@ const Checkout = (props) => {
                     placeholder={"Zip Code"}
                     name={"zip"}
                     value={zip}
-                    keyboardType={"numberic"}
+                    keyboardType={"numeric"}
                     onChangeText={(text) => setZip(text)}
                 />
 
