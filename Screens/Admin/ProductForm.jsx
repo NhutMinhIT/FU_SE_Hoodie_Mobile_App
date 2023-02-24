@@ -70,19 +70,35 @@ const ProductForm = (props) => {
         }
     }, [])
 
+    // const pickImage = async uri => {
+    //     let result = await ImagePicker.launchImageLibraryAsync({
+    //         mediaTypes: ImagePicker.MediaTypeOptions.All,
+    //         allowsEditing: true,
+    //         aspect: [4, 3],
+    //         quality: 1
+    //     });
+    //     if (!result.canceled) {
+    //         setMainImage(result.uri);
+    //         setImage(result.uri)
+    //     }
+    // }
     const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
-            quality: 1
+            quality: 1,
         });
-        if (!result.canceled) {
-            setMainImage(result.uri);
-            setImage(result.uri)
-        }
-    }
 
+        console.log(result);
+
+        if (!result.canceled) {
+            setMainImage(result.assets[0].uri);
+            setImage(result.assets[0].uri)
+
+        }
+    };
     const addProduct = () => {
         if (
             name == "" ||
@@ -94,8 +110,10 @@ const ProductForm = (props) => {
         ) {
             setError('Pleas !! Enter all entries ')
         }
+
         let formData = new FormData();
-        const newImageUri = 'file:///' + image.split("file:/").join("")
+
+        const newImageUri = "file:///" + image.split("file:/").join("");
         formData.append("image", {
             uri: newImageUri,
             type: mime.getType(newImageUri),
@@ -148,12 +166,8 @@ const ProductForm = (props) => {
         <FormContainer>
             <View style={styles.imageContainer}>
                 <Image style={styles.image} source={{ uri: mainImage }} />
-                <TouchableOpacity
-                    style={styles.imagePicker}
-                    onPress={pickImage}
-                >
-                    <MaterialIcons name="camera-alt" color={'white'} size={20} />
-
+                <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
+                    <Icon style={{ color: "white" }} name="camera" />
                 </TouchableOpacity>
             </View>
             <View style={styles.label}>
