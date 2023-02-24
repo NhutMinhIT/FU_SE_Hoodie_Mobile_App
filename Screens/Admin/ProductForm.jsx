@@ -17,6 +17,8 @@ import Input from '../../Shared/Form/Input'
 import EasyButton from "../../Shared/StyledComponents/EasyButton";
 import Error from '../../Shared/Error'
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import * as ImagePicker from 'expo-image-picker'
+import mime from 'mime'
 //API 
 import axios from "axios"
 import baseURL from "../../assets/common/baseUrl"
@@ -41,24 +43,117 @@ const ProductForm = (props) => {
     const [item, setItem] = useState(null);
 
     useEffect(() => {
+        AsyncStorage.getItem("jwt")
+            .then((res) => {
+                setToken(res)
+            })
+            .catch((error) => console.log(error))
         //Fetch API Categories
         axios
             .get(`${baseURL}categories`)
             .then((res) => setCategories(res.data))
-            .catch((error) => alert('Category Error .....!'))
+            .catch((error) => alert('Category Error .....!'));
+
+        //Image Picker
+        (async () => {
+            if (Platform.OS !== 'web') {
+                const {
+                    status,
+                } = await ImagePicker.requestCameraPermissionsAsync();
+                if (status !== "granted") {
+                    alert("Sorry, we need camera rool permission to make this work !!")
+                }
+            }
+        })();
         return () => {
             setCategories([])
         }
     }, [])
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1
+        });
+        if (!result.canceled) {
+            setMainImage(result.uri);
+            setImage(result.uri)
+        }
+    }
+
+    const addProduct = () => {
+        if (
+            name == "" ||
+            brand == '' ||
+            price == '' ||
+            description == '' ||
+            category == '' ||
+            countInStock == ''
+        ) {
+            setError('Pleas !! Enter all entries ')
+        }
+        let formData = new FormData();
+        const newImageUri = 'file:///' + image.split("file:/").join("")
+        formData.append("image", {
+            uri: newImageUri,
+            type: mime.getType(newImageUri),
+            name: newImageUri.split("/").pop()
+        });
+        formData.append("name", name)
+        formData.append("brand", brand)
+        formData.append("price", price)
+        formData.append("description", description)
+        formData.append("category", category)
+        formData.append("countInStock", countInStock)
+        formData.append("rating", rating)
+        formData.append("numReviews", numReviews)
+        formData.append("isFeatured", isFeatured)
+
+        const config = {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`
+            }
+        }
+        axios
+            .post(`${baseURL}products`, formData, config)
+            .then((res) => {
+                if (res.status == 200 || res.status == 201) {
+                    ast.show({
+                        topOffset: 60,
+                        type: "success",
+                        text1: "Added New Product",
+                        text2: ""
+                    });
+                    setTimeout(() => {
+                        props.navigation.navigate("Products");
+                    }, 500)
+                }
+            }).catch((error) => {
+                Toast.show({
+                    topOffset: 60,
+                    type: "error",
+                    text1: "Something went wrong",
+                    text2: "Please try again"
+                })
+            })
+    }
+    //fetch API ADD Products
+
+
     return (
 
         <FormContainer>
-            <View>
-                <Image source={{ uri: mainImage }} />
-                <TouchableOpacity>
-                    <Text>
-                        Image
-                    </Text>
+            <View style={styles.imageContainer}>
+                <Image style={styles.image} source={{ uri: mainImage }} />
+                <TouchableOpacity
+                    style={styles.imagePicker}
+                    onPress={pickImage}
+                >
+                    <MaterialIcons name="camera-alt" color={'white'} size={20} />
+
                 </TouchableOpacity>
             </View>
             <View style={styles.label}>
@@ -137,7 +232,7 @@ const ProductForm = (props) => {
                 <EasyButton
                     large
                     primary
-                // onPress={() => addProduct()}
+                    onPress={() => addProduct()}
                 >
                     <Text style={styles.buttonText}>Confirm</Text>
                 </EasyButton>
