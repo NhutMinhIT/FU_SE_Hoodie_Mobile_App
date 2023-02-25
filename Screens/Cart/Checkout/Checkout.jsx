@@ -40,6 +40,8 @@ const Checkout = (props) => {
             phone: phone,
             shippingAddress1: address,
             shippingAddress2: address2,
+            status: '3',
+            user,
             zip
         }
         navigation.navigate("Payment", { order: order })

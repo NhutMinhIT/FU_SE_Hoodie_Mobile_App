@@ -3,17 +3,47 @@ import { View, HStack, VStack, List, Avatar, FlatList, Box, Button } from 'nativ
 import { connect } from 'react-redux'
 import * as actions from '../../../Redux/Actions/cartActions.js'
 import { Dimensions, StyleSheet, ScrollView, Text } from 'react-native'
+import Toast from 'react-native-toast-message'
+
+import baseURL from '../../../assets/common/baseUrl.js'
+import axios from 'axios'
+
 
 var { height, width } = Dimensions.get("window")
 
-const Confirm = (props) => {
-    const confirm = props.route.params
+const finalOrder = (props) => {
+    const finalOrder = props.route.params;
 
     const confrmOrder = () => {
-        setTimeout(() => {
-            props.clearCart();
-            props.navigation.navigate("Cart")
-        }, 500)
+
+        const order = finalOrder.order.order;
+
+        axios
+            .post(`${baseURL}orders`, order)
+            .then((res) => {
+                if (res.status == 200 || res.status == 201) {
+                    Toast.show({
+                        topOffset: 60,
+                        type: 'success',
+                        text1: 'Order Successfully !!!',
+                        text2: ''
+                    })
+                    setTimeout(() => {
+                        props.clearCart();
+                        props.navigation.navigate("Cart")
+                    }, 500)
+                }
+            })
+            .catch((error) => {
+                Toast.show({
+                    topOffset: 60,
+                    type: 'error',
+                    text1: 'Order Failed ! ',
+                    text2: 'Pleas Again !!!'
+                })
+            })
+
+
     }
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -23,15 +53,15 @@ const Confirm = (props) => {
                     <View style={{ borderWidth: 1, borderColor: 'orange' }}>
                         <Text style={styles.shipping}>Shipping to:</Text>
                         <View style={{ padding: 8 }}>
-                            <Text>Phone: {confirm.order.order.phone}</Text>
-                            <Text>Addres: {confirm.order.order.shippingAddress1}</Text>
-                            <Text>Addres2: {confirm.order.order.shippingAddress2}</Text>
-                            <Text>City: {confirm.order.order.city}</Text>
-                            <Text>ZipCode: {confirm.order.order.zip}</Text>
-                            <Text>Zip: {confirm.order.order.country}</Text>
+                            <Text>Phone: {finalOrder.order.order.phone}</Text>
+                            <Text>Addres: {finalOrder.order.order.shippingAddress1}</Text>
+                            <Text>Addres2: {finalOrder.order.order.shippingAddress2}</Text>
+                            <Text>City: {finalOrder.order.order.city}</Text>
+                            <Text>ZipCode: {finalOrder.order.order.zip}</Text>
+                            <Text>Zip: {finalOrder.order.order.country}</Text>
 
                         </View>
-                        {confirm.order.order.orderItems.map((x) => {
+                        {finalOrder.order.order.orderItems.map((x) => {
                             return (
                                 <List style={styles.listItem}
                                     key={x.product.name}
@@ -103,4 +133,4 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     }
 })
-export default connect(null, mapDispathchToProps)(Confirm)
+export default connect(null, mapDispathchToProps)(finalOrder)
