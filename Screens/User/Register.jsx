@@ -37,34 +37,35 @@ const Register = (props) => {
                 password: password,
                 phone: phone,
                 isAdmin: false
-            };
+            }
             axios
                 .post(`${baseURL}users/register`, user)
                 .then((res) => {
-                    if (res.status = 200) {
+                    if (res.status == 200 || res == 201) {
                         Toast.show({
                             topOffset: 60,
-                            type: 'success',
-                            text1: 'Register Successfully !!!',
-                            text2: 'Please login into your account !'
-                        })
+                            type: "success",
+                            text1: "Registration Succeeded",
+                            text2: "Please Login into your account",
+                        });
                         setTimeout(() => {
-                            navigation.navigate("Login");
-                        }, 500)
+                            props.navigation.navigate("Login");
+                        }, 500);
                     }
+
                 })
                 .catch((error) => {
                     Toast.show({
                         topOffset: 60,
-                        type: 'error',
-                        text1: 'Something went wrong !',
-                        text2: "Please try again !",
-                    })
+                        type: "error",
+                        text1: "Something went wrong",
+                        text2: "Please try again",
+                    });
                 });
+
         }
+
     }
-
-
 
     return (
         <KeyboardAwareScrollView

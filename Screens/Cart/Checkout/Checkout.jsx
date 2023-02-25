@@ -40,6 +40,8 @@ const Checkout = (props) => {
             phone: phone,
             shippingAddress1: address,
             shippingAddress2: address2,
+            status: '3',
+            user,
             zip
         }
         navigation.navigate("Payment", { order: order })
@@ -106,7 +108,7 @@ const Checkout = (props) => {
                     })}
                 </Select>
 
-                <View style={{ width: '80%', alignItems: 'center' }}>
+                <View style={{ width: '60%', alignItems: 'center' }}>
                     <Button title='Confirm' onPress={() => checkOut()} />
                 </View>
             </FormContainer>

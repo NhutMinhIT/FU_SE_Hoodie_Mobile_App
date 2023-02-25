@@ -33,11 +33,11 @@ const Login = (props) => {
             password,
         };
 
-        if(!email.includes('@')){
+        if (!email.includes('@')) {
             setError('Please fill in correct email')
         }
-        
-        if (email === "" || password === "") {
+
+        else if (email === "" || password === "") {
             setError("Please fill in your credentials");
         } else {
             loginUser(user, context.dispatch);
