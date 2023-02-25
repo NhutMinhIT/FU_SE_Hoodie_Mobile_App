@@ -70,7 +70,16 @@ const Categories = (props) => {
 
         axios
             .post(`${baseURL}categories`, category, config)
-            .then((res) => setCategories([...categories, res.data]))
+            .then((res) => {
+                Toast.show({
+                    topOffset: 60,
+                    type: "success",
+                    text1: "Added Category",
+                    text2: "Check Category",
+                });
+                setCategories([...categories, res.data])
+            }
+            )
             .catch((error) => alert("Error to load categories"));
 
         setCategoryName("");
@@ -88,6 +97,12 @@ const Categories = (props) => {
             .then((res) => {
                 const newCategories = categories.filter((item) => item.id !== id);
                 setCategories(newCategories);
+                Toast.show({
+                    topOffset: 60,
+                    type: "success",
+                    text1: "DELETE CATEGORY SUCCESSFULLY",
+                    text2: "Please Login into your account",
+                });
             })
             .catch((error) => alert("Error to load categories"));
     }
