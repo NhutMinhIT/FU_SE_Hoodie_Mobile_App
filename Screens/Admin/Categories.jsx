@@ -99,8 +99,8 @@ const Categories = (props) => {
                 setCategories(newCategories);
                 Toast.show({
                     topOffset: 60,
-                    type: "success",
-                    text1: "DELETE CATEGORY SUCCESSFULLY",
+                    type: "error",
+                    text1: `DELETE CATEGORY SUCCESSFULLY`,
                     text2: "Please Login into your account",
                 });
             })
