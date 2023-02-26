@@ -62,7 +62,7 @@ const UserProfile = (props) => {
             </Text>
             <View style={{ marginTop: 20 }}>
                 <Text style={{ margin: 10 }}>
-                    Email: {userProfile ? userProfile.email : "uminhrtri@gmail.com"}
+                    Email: {userProfile ? userProfile.email : "minhrtri@gmail.com"}
                 </Text>
                 <Text style={{ margin: 10 }}>
                     Phone: {userProfile ? userProfile.phone : "0987656789"}
