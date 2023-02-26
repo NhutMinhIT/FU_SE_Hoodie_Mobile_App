@@ -78,6 +78,9 @@ const Categories = (props) => {
                     text2: "Check Category",
                 });
                 setCategories([...categories, res.data])
+                setTimeout(() => {
+                    props.navigation.navigate("Products")
+                }, 500)
             }
             )
             .catch((error) => alert("Error to load categories"));
@@ -103,6 +106,9 @@ const Categories = (props) => {
                     text1: `DELETE CATEGORY SUCCESSFULLY`,
                     text2: "Please Login into your account",
                 });
+                setTimeout(() => {
+                    props.navigation.navigate("Products")
+                }, 500)
             })
             .catch((error) => alert("Error to load categories"));
     }
