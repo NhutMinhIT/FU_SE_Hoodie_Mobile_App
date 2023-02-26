@@ -55,7 +55,7 @@ const Cart = (props) => {
           <EasyButton
             medium
             primary
-            onPress={() => navigation.navigate("Checkout")
+            onPress={() => props.navigation.navigate("Checkout")
             }
           >
             <Text style={{ color: 'white' }}>Checkout</Text>
