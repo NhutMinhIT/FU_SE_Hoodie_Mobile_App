@@ -58,11 +58,11 @@ const UserProfile = (props) => {
 
         <ScrollView contentContainerStyle={styles.subContainer}>
             <Text style={{ fontSize: 30 }}>
-                {userProfile ? userProfile.name : "User"}
+                {userProfile ? userProfile.name : "Long KH"}
             </Text>
             <View style={{ marginTop: 20 }}>
                 <Text style={{ margin: 10 }}>
-                    Email: {userProfile ? userProfile.email : "minhrtri@gmail.com"}
+                    Email: {userProfile ? userProfile.email : "longkh@gmail.com"}
                 </Text>
                 <Text style={{ margin: 10 }}>
                     Phone: {userProfile ? userProfile.phone : "0987656789"}

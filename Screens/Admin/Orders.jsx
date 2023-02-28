@@ -42,6 +42,7 @@ const Orders = (props) => {
                     <OrderCard
                         navigation={props.navigation}
                         {...item}
+                        editMode={true}
                     />
                 )}
                 keyExtractor={(item) => item.id}

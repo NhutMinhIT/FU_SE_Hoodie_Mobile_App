@@ -99,7 +99,7 @@ const ProductForm = (props) => {
 
         }
     };
-    const addProduct = () => {
+    const handleAddProduct = () => {
         if (
             name == "" ||
             brand == '' ||
@@ -108,7 +108,7 @@ const ProductForm = (props) => {
             category == '' ||
             countInStock == ''
         ) {
-            setError('Pleas !! Enter all entries ')
+            setError('Please !! Enter all entries ')
         }
 
         let formData = new FormData();
@@ -156,11 +156,10 @@ const ProductForm = (props) => {
                     text1: "Something went wrong",
                     text2: "Please try again"
                 })
+                console.log(error)
             })
     }
     //fetch API ADD Products
-
-
     return (
 
         <FormContainer>
@@ -246,7 +245,7 @@ const ProductForm = (props) => {
                 <EasyButton
                     large
                     primary
-                    onPress={() => addProduct()}
+                    onPress={() => handleAddProduct()}
                 >
                     <Text style={styles.buttonText}>Confirm</Text>
                 </EasyButton>

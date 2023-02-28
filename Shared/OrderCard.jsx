@@ -29,13 +29,15 @@ const OrderCard = (props) => {
 
     useEffect(() => {
 
-        AsyncStorage.getItem("jwt")
-            .then((res) => {
-                setToken(res);
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+        if (props.editMode) {
+            AsyncStorage.getItem("jwt")
+                .then((res) => {
+                    setToken(res);
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
 
         if (props.status == "3") {
             setOrderStatus(<TrafficLight unavailable></TrafficLight>)
@@ -77,6 +79,7 @@ const OrderCard = (props) => {
             totalPrice: props.totalPrice,
             user: props.user,
             zip: props.zip
+
         }
 
         axios
@@ -116,7 +119,14 @@ const OrderCard = (props) => {
                     Status: {statusText} {orderStatus}
                 </Text>
                 <Text>
-                    Address: {props.shippingAddress1} ||  {props.shippingAddress2}
+                    Name: {props.user.name}
+                </Text>
+                <Text>
+                    Phone: {props.phone}
+                </Text>
+
+                <Text>
+                    Address: {props.shippingAddress1}, {props.shippingAddress2}
                 </Text>
                 <Text>
                     City: {props.city}
@@ -131,32 +141,40 @@ const OrderCard = (props) => {
                     <Text>Price: </Text>
                     <Text style={styles.price}>${props.totalPrice}</Text>
                 </View>
-                <Select
-                    mode="dropdown"
-                    iosIcon={<Icon color={"#007aff"} name="arrow-down" />}
-                    style={{ width: undefined }}
-                    selectedValue={statusChange}
-                    placeholder="Change Status"
-                    accessibilityLabel="Choose Status"
-                    placeholderTextColor={'#010a5c'}
-                    _selectedItem={{
-                        bg: "teal.600",
-                        endIcon: <CheckIcon size="5" />
-                    }}
-                    onValueChange={(e) => setStatusChange(e)}
-                >
-                    {codes.map((c) => {
-                        return (
-                            <Select.Item key={c.code} label={c.name} value={c.code} />
-                        );
-                    })}
-                </Select>
-                <EasyButton
-                    secondary
-                    large
-                    onPress={() => updateOrder()}>
-                    <Text style={{ color: "white" }}>Update</Text>
-                </EasyButton>
+                {props.editMode ? (
+                    <View>
+                        <Select
+                            mode="dropdown"
+                            iosIcon={<Icon color={"#007aff"} name="arrow-down" />}
+                            style={{ width: undefined }}
+                            selectedValue={statusChange}
+                            placeholder="Change Status"
+                            accessibilityLabel="Choose Status"
+                            placeholderTextColor={'#010a5c'}
+                            _selectedItem={{
+                                bg: "teal.600",
+                                endIcon: <CheckIcon size="5" />
+                            }}
+                            onValueChange={(e) => setStatusChange(e)}
+                        >
+                            {codes.map((c) => {
+                                return (
+                                    <Select.Item key={c.code} label={c.name} value={c.code} />
+                                );
+                            })}
+                        </Select>
+                        <EasyButton
+                            secondary
+                            large
+                            onPress={() => updateOrder()}>
+                            <Text style={{ color: "white" }}>Update</Text>
+                        </EasyButton>
+                    </View>
+                ) : null}
+
+
+
+
             </View>
         </View>
 
