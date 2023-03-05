@@ -1,18 +1,19 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { View, Text, ScrollView, StyleSheet, Button } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import OrderCard from '../../Shared/OrderCard'
 //API
 import axios from "axios"
 import baseURL from "../../assets/common/baseUrl"
 
-
 //Context
 import AuthGlobal from "../../Context/store/AuthGlobal";
 import { logoutUser } from "../../Context/actions/Auth.actions";
 
 const UserProfile = (props) => {
+
     const context = useContext(AuthGlobal);
     const [userProfile, setUserProfile] = useState()
     const [orders, setOrders] = useState()
@@ -42,9 +43,10 @@ const UserProfile = (props) => {
                     const data = x.data;
                     console.log(data)
                     const userOrders = data.filter(
-                        (order) => order.user._id === context.stateUser.user.userId
+                        (order) => order.user.id === context.stateUser.user.userId
                     );
                     setOrders(userOrders);
+
                 })
                 .catch((error) => console.log(error))
 
@@ -58,14 +60,14 @@ const UserProfile = (props) => {
 
         <ScrollView contentContainerStyle={styles.subContainer}>
             <Text style={{ fontSize: 30 }}>
-                {userProfile ? userProfile.name : "Long KH"}
+                {userProfile ? userProfile.name : "USER"}
             </Text>
             <View style={{ marginTop: 20 }}>
                 <Text style={{ margin: 10 }}>
-                    Email: {userProfile ? userProfile.email : "longkh@gmail.com"}
+                    Email: {userProfile ? userProfile.email : "user"}
                 </Text>
                 <Text style={{ margin: 10 }}>
-                    Phone: {userProfile ? userProfile.phone : "0987656789"}
+                    Phone: {userProfile ? userProfile.phone : "user"}
                 </Text>
             </View>
             <View style={{ marginTop: 80 }}>

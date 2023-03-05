@@ -129,6 +129,8 @@ const ProductForm = (props) => {
         formData.append("numReviews", numReviews)
         formData.append("isFeatured", isFeatured)
 
+        console.log(formData)
+
         const config = {
             headers: {
                 "Content-Type": "multipart/form-data",
