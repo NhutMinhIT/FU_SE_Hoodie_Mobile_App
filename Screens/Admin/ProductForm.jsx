@@ -130,6 +130,7 @@ const ProductForm = (props) => {
         formData.append("rating", rating);
         formData.append("numReviews", numReviews);
         formData.append("isFeatured", isFeatured);
+
         console.log(formData)
 
         const config = {
