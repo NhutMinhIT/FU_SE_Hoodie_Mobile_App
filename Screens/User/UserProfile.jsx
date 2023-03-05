@@ -42,7 +42,7 @@ const UserProfile = (props) => {
                     const data = x.data;
                     console.log(data)
                     const userOrders = data.filter(
-                        (order) => order.user.id === context.stateUser.user.userId
+                        (order) => order.user._id === context.stateUser.user.userId
                     );
                     setOrders(userOrders);
                 })
@@ -58,7 +58,7 @@ const UserProfile = (props) => {
 
         <ScrollView contentContainerStyle={styles.subContainer}>
             <Text style={{ fontSize: 30 }}>
-                {userProfile ? userProfile.name : "USER !"}
+                {userProfile ? userProfile.name : "USER"}
             </Text>
             <View style={{ marginTop: 20 }}>
                 <Text style={{ margin: 10 }}>
