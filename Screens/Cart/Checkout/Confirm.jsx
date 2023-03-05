@@ -1,136 +1,159 @@
-import React from 'react'
-import { View, HStack, VStack, List, Avatar, FlatList, Box, Button } from 'native-base'
-import { connect } from 'react-redux'
-import * as actions from '../../../Redux/Actions/cartActions.js'
-import { Dimensions, StyleSheet, ScrollView, Text } from 'react-native'
-import Toast from 'react-native-toast-message'
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, Dimensions, ScrollView, Button } from "react-native";
+import { Text, Left, Right, ListItem, Thumbnail, Body, List, Avatar, Box } from "native-base";
+import { connect } from "react-redux";
+import * as actions from "../../../Redux/Actions/cartActions";
 
-import baseURL from '../../../assets/common/baseUrl.js'
-import axios from 'axios'
+import Toast from "react-native-toast-message";
+import axios from "axios";
+import baseURL from "../../../assets/common/baseUrl";
 
+var { width, height } = Dimensions.get("window");
 
-var { height, width } = Dimensions.get("window")
-
-const finalOrder = (props) => {
+const Confirm = (props) => {
     const finalOrder = props.route.params;
 
-    const confrmOrder = () => {
+    // Add this
+    const [productUpdate, setProductUpdate] = useState();
+    useEffect(() => {
+        if (finalOrder) {
+            getProducts(finalOrder);
+        }
+        return () => {
+            setProductUpdate();
+        };
+    }, [props]);
 
+    // Add this
+    const getProducts = (x) => {
+        const order = x.order.order;
+        var products = [];
+        if (order) {
+            order.orderItems.forEach((cart) => {
+                axios
+                    .get(`${baseURL}products/${cart.product}`)
+                    .then((data) => {
+                        products.push(data.data);
+                        setProductUpdate(products);
+                    })
+                    .catch((e) => {
+                        console.log(e);
+                    });
+            });
+        }
+
+    };
+
+    const confirmOrder = () => {
         const order = finalOrder.order.order;
-
         axios
             .post(`${baseURL}orders`, order)
             .then((res) => {
                 if (res.status == 200 || res.status == 201) {
                     Toast.show({
                         topOffset: 60,
-                        type: 'success',
-                        text1: 'Order Successfully !!!',
-                        text2: ''
-                    })
+                        type: "success",
+                        text1: "Order Completed",
+                        text2: "",
+                    });
                     setTimeout(() => {
                         props.clearCart();
-                        props.navigation.navigate("Cart")
-                    }, 500)
+                        props.navigation.navigate("Cart");
+                    }, 500);
                 }
             })
             .catch((error) => {
                 Toast.show({
                     topOffset: 60,
-                    type: 'error',
-                    text1: 'Order Failed ! ',
-                    text2: 'Pleas Again !!!'
-                })
-            })
+                    type: "error",
+                    text1: "Something went wrong",
+                    text2: "Please try again",
+                });
+            });
+    };
 
-
-    }
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.titleContainer}>
-                <Text style={{ fontSize: 20, fontWeight: '700' }}>Conrm Order</Text>
-                {props.route.params ?
-                    <View style={{ borderWidth: 1, borderColor: 'orange' }}>
-                        <Text style={styles.shipping}>Shipping to:</Text>
+                <Text style={{ fontSize: 20, fontWeight: "bold" }}>Confirm Order</Text>
+                {props.route.params ? (
+                    <View style={{ borderWidth: 1, borderColor: "orange" }}>
+                        <Text style={styles.title}>Shipping to:</Text>
                         <View style={{ padding: 8 }}>
-                            <Text>Phone: {finalOrder.order.order.phone}</Text>
-                            <Text>Addres: {finalOrder.order.order.shippingAddress1}</Text>
-                            <Text>Addres2: {finalOrder.order.order.shippingAddress2}</Text>
+                            <Text>Address: {finalOrder.order.order.shippingAddress1}</Text>
+                            <Text>Address2: {finalOrder.order.order.shippingAddress2}</Text>
                             <Text>City: {finalOrder.order.order.city}</Text>
-                            <Text>ZipCode: {finalOrder.order.order.zip}</Text>
-                            <Text>Zip: {finalOrder.order.order.country}</Text>
-
+                            <Text>Zip Code: {finalOrder.order.order.zip}</Text>
+                            <Text>Country: {finalOrder.order.order.country}</Text>
                         </View>
-                        {finalOrder.order.order.orderItems.map((x) => {
-                            return (
-                                <List style={styles.listItem}
-                                    key={x.product.name}
-                                    avatar
-                                >
-                                    <Text style={styles.titleItem}>Items:</Text>
-                                    <HStack style={styles.box}>
-                                        <Avatar source={{ uri: x.product.image }} />
-                                        <Text>{x.product.name}</Text>
-                                        <Text style={{
-                                            marginLeft: 15,
-                                            fontSize: 16,
-                                            fontWeight: '500',
-                                            color: 'red'
-                                        }}>${x.product.price}</Text>
-                                    </HStack>
+                        <Text style={styles.title}>Items:</Text>
+                        {/* CHANGE THIS */}
+                        {productUpdate && (
+                            <>
+                                {productUpdate.map((x) => {
+                                    return (
+                                        <List style={styles.listItem} key={x.name} avatar>
 
-                                </List>
-                            )
-                        })}
+                                            <Avatar source={{ uri: x.image }} />
+
+                                            <Box style={styles.body}>
+
+                                                <Text>{x.name}</Text>
+
+
+                                                <Text>$ {x.price}</Text>
+
+                                            </Box>
+                                        </List>
+                                    );
+                                })}
+                            </>
+                        )}
                     </View>
-                    : <View>
-                        <Text style={{ marginTop: '40%', color: 'red', fontWeight: '500' }}>No order information yet.</Text></View>
-                }
-                <Button onPress={confrmOrder}>Place Order</Button>
+                ) : null}
+                <View style={{ alignItems: "center", margin: 20 }}>
+                    <Button title={"Place order"} onPress={confirmOrder} />
+                </View>
             </View>
-        </ScrollView >)
-}
+        </ScrollView>
+    );
+};
 
-const mapDispathchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        clearCart: () => dispatch(actions.clearCart())
-    }
-}
+        clearCart: () => dispatch(actions.clearCart()),
+    };
+};
 
 const styles = StyleSheet.create({
     container: {
         height: height,
-        padding: 0,
-        alignContent: 'center',
-        backgroundColor: 'white'
+        padding: 8,
+        alignContent: "center",
+        backgroundColor: "white",
     },
     titleContainer: {
-        justifyContent: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         margin: 8,
-        alignItems: 'center'
     },
-    shipping: {
-        alignSelf: 'center',
+    title: {
+        alignSelf: "center",
         margin: 8,
         fontSize: 16,
-        fontWeight: '700'
-    },
-    titleItem: {
-        justifyContent: 'center',
-        margin: 8,
-        fontWeight: '700',
-        fontSize: 16
+        fontWeight: "bold",
     },
     listItem: {
-        alignItems: 'center',
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        width: width / 1.2
+        alignItems: "center",
+        backgroundColor: "white",
+        justifyContent: "center",
+        width: width / 1.2,
     },
-    box: {
+    body: {
         margin: 10,
-        alignItems: 'center',
-        flexDirection: 'row',
-    }
-})
-export default connect(null, mapDispathchToProps)(finalOrder)
+        alignItems: "center",
+        flexDirection: "row",
+    },
+});
+
+export default connect(null, mapDispatchToProps)(Confirm);

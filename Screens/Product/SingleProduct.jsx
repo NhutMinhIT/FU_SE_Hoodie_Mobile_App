@@ -81,7 +81,7 @@ const SingleProduct = (props) => {
                         primary
                         medium
                         onPress={() => {
-                            props.addItemToCart(item),
+                            props.addItemToCart(item.id),
                                 Toast.show({
                                     topOffset: 60,
                                     type: 'success',

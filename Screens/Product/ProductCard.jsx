@@ -36,13 +36,13 @@ const ProductCard = (props) => {
                         primary
                         medium
                         onPress={() => {
-                            props.addItemToCart(props)
-                            Toast.show({
-                                topOffset: 60,
-                                type: 'success',
-                                text1: `Added ${name} to Card`,
-                                text2: 'Go to Card to complete order'
-                            })
+                            props.addItemToCart(props.id),
+                                Toast.show({
+                                    topOffset: 60,
+                                    type: 'success',
+                                    text1: `Added ${name} to Card`,
+                                    text2: 'Go to Card to complete order'
+                                })
                         }}
                     >
                         <Text style={{ color: 'white' }}>Add</Text>

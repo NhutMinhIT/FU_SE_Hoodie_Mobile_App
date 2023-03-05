@@ -118,9 +118,9 @@ const OrderCard = (props) => {
                 <Text>
                     Status: {statusText} {orderStatus}
                 </Text>
-                <Text>
+                {/* <Text>
                     Name: {props.user.name}
-                </Text>
+                </Text> */}
                 <Text>
                     Phone: {props.phone}
                 </Text>

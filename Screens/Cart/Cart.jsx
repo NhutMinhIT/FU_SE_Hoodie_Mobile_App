@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { View, Dimensions, StyleSheet, Button, TouchableOpacity, TouchableOpacityBase } from 'react-native'
 import {
   Container,
@@ -18,11 +18,13 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 import { connect } from 'react-redux';
 import * as actions from '../../Redux/Actions/cartActions'
 import Authglobal from '../../Context/store/AuthGlobal'
-
+import axios from "axios";
+import baseURL from "../../assets/common/baseUrl";
 import CartItem from './CartItem';
 import EasyButton from '../../Shared/StyledComponents/EasyButton';
 
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 var { height, width } = Dimensions.get('window')
 
 
@@ -30,89 +32,110 @@ const Cart = (props) => {
   const navigation = useNavigation();
   const context = useContext(Authglobal);
 
-  var total = 0;
-  props.cartItems.forEach(cart => {
-    return (total += cart.product.price)
-  })
+  // Add this
+  const [productUpdate, setProductUpdate] = useState()
+  const [totalPrice, setTotalPrice] = useState()
+  useEffect(() => {
+    getProducts()
+    return () => {
+      setProductUpdate()
+      setTotalPrice()
+    }
+  }, [props])
+
+  const getProducts = () => {
+    var products = [];
+    props.cartItems.forEach(cart => {
+      axios
+        .get(`${baseURL}products/${cart.product}`)
+        .then(data => {
+          products.push(data.data)
+          setProductUpdate(products)
+          var total = 0;
+          products.forEach(product => {
+            const price = (total += product.price)
+            setTotalPrice(price)
+          });
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    })
+  }
   return (
     <>
-      <Heading size='xl'
-        style={{ alignSelf: 'center', marginBottom: 10 }}>My Cart</Heading>
+      {productUpdate ? (
+        <View>
+          <Heading style={{ alignSelf: "center" }}>Cart</Heading>
+          <View style={{ flexDirection: 'row' }}>
 
-      <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.price}>$ {totalPrice}</Text>
 
-        <Text style={styles.price}>${total}</Text>
-
-        <EasyButton
-          medium
-          danger
-          onPress={() => props.clearCart()}
-        >
-          <Text style={{ color: 'white' }}>Clear</Text>
-        </EasyButton>
-
-        {context.stateUser.isAuthenticated ? (
-          <EasyButton
-            medium
-            primary
-            onPress={() => props.navigation.navigate("Checkout")
-            }
-          >
-            <Text style={{ color: 'white' }}>Checkout</Text>
-          </EasyButton>
-        ) : (
-          <EasyButton
-            medium
-            secondary
-            onPress={() => props.navigation.navigate("Login")
-            }
-          >
-            <Text style={{ color: 'white' }}>Login</Text>
-          </EasyButton>
-        )}
-
-      </View>
-      {props.cartItems.length ? (
-        <ScrollView>
-          <SwipeListView
-            data={props.cartItems}
-            renderItem={(data) => (
-              <CartItem item={data} />
+            <EasyButton
+              danger
+              medium
+              onPress={() => props.clearCart()}
+            >
+              <Text style={{ color: 'white' }}>Clear</Text>
+            </EasyButton>
+            {context.stateUser.isAuthenticated ? (
+              <EasyButton
+                primary
+                medium
+                onPress={() => props.navigation.navigate('Checkout')}
+              >
+                <Text style={{ color: 'white' }}>Checkout</Text>
+              </EasyButton>
+            ) : (
+              <EasyButton
+                secondary
+                medium
+                onPress={() => props.navigation.navigate('Login')}
+              >
+                <Text style={{ color: 'white' }}>Login</Text>
+              </EasyButton>
             )}
-            renderHiddenItem={(data) => (
-              <View style={styles.hiddenContainer}>
-                <TouchableOpacity
-                  style={styles.hiddenButton}
-                  onPress={() => props.removeFromCart(data.item)}
-                >
-                  <Icon name="trash" color={"red"} size={30} />
+          </View>
+          <ScrollView>
+            <SwipeListView
+              data={productUpdate}
+              renderItem={(data) => (
+                <CartItem item={data} />
+              )}
+              renderHiddenItem={(data) => (
+                <View style={styles.hiddenContainer}>
+                  <TouchableOpacity
+                    style={styles.hiddenButton}
 
-                </TouchableOpacity>
+                  >
+                    <Icon name="trash" color={"red"} size={30}
+                      onPress={() => props.removeFromCart(data.item)}
 
-              </View>
-            )}
-            disableRightSwipe={true}
-            previewOpenDelay={3000}
-            friction={1000}
-            tension={30}
-            leftOpenValue={75}
-            stopLeftSwipe={-20}
-            rightOpenValue={-40}
-          />
+                    />
 
-        </ScrollView>
-
+                  </TouchableOpacity>
+                </View>
+              )}
+              disableRightSwipe={true}
+              previewOpenDelay={3000}
+              friction={1000}
+              tension={30}
+              leftOpenValue={75}
+              stopLeftSwipe={-20}
+              rightOpenValue={-40}
+            />
+          </ScrollView>
+        </View>
       ) : (
-        <Stack style={styles.emptyContainer}>
-          <Text>Looks like you cart is empty</Text>
-          <Text>AddProduct to your cart to get started</Text>
-        </Stack>
+        <Container style={styles.emptyContainer}>
+          <Text>Looks like your cart is empty</Text>
+          <Text>Add products to your cart to get started</Text>
+        </Container>
       )
       }
-
     </>
-  )
-}
+  );
+};
 const mapStateToProps = (state) => {
   const { cartItems } = state;
   return {
