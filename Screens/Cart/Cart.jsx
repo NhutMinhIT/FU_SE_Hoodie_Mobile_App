@@ -127,10 +127,10 @@ const Cart = (props) => {
           </ScrollView>
         </View>
       ) : (
-        <Container style={styles.emptyContainer}>
+        <Stack style={styles.emptyContainer}>
           <Text>Looks like your cart is empty</Text>
           <Text>Add products to your cart to get started</Text>
-        </Container>
+        </Stack>
       )
       }
     </>

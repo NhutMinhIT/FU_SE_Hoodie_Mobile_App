@@ -104,13 +104,13 @@ const Categories = (props) => {
                     topOffset: 60,
                     type: "error",
                     text1: `DELETE CATEGORY SUCCESSFULLY`,
-                    text2: "Please Login into your account",
+                    // text2: "Please Login into your account",
                 });
                 setTimeout(() => {
                     props.navigation.navigate("Products")
                 }, 500)
             })
-            .catch((error) => alert("Error to load categories"));
+            .catch((error) => alert("Already product with category!!"));
     }
 
     return (
