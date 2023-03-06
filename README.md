@@ -20,4 +20,4 @@ Project Mobile with React-Native (frontend). Backend (nodejs, expressjs, mongose
 
 
 # Hoodie_Application UI
-https://f27-zpc.zdn.vn/8314222789305840570/f5ebbb311452c90c9043.jpg https://f16-zpc.zdn.vn/6590409399716778534/215b6981c6e21bbc42f3.jpg
+![image](https://user-images.githubusercontent.com/90835621/223201393-3b494b58-313a-4082-881f-23859973242b.png) ![Uploading image.png…]()
