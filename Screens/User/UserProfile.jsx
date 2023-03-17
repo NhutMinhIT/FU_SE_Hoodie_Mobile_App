@@ -44,6 +44,9 @@ const UserProfile = (props) => {
                     const userOrders = data.filter(
                         (order) => order.user._id === context.stateUser.user.userId
                     );
+                    // const userOrders = data.filter(
+                    //     (order) => order.user && order.user._id === context.stateUser.user.userId
+                    // );
                     setOrders(userOrders);
                 })
                 .catch((error) => console.log(error))

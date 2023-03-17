@@ -1,8 +1,8 @@
 import { Platform } from "react-native";
 
 //let baseURL = 'https://hoodiechinhhang.onrender.com/api/v1/'; //deploy server
-let baseURL = 'https://ho-czxz.onrender.com/api/v1/'; //deploy server dự phòng
-//let baseURL = 'http://192.168.1.167:5000/api/v1/'
+let baseURL = 'https://hoodieserver.onrender.com/api/v1/'; //deploy server dự phòng
+//let baseURL = 'http://10.1.111.255:5000/api/v1/'
 
 // {
 //     Platform.OS == 'android' ?

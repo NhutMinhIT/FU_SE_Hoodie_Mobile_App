@@ -93,24 +93,19 @@ const Confirm = (props) => {
                                 {productUpdate.map((x) => {
                                     return (
                                         <List style={styles.listItem} key={x.name} avatar>
-
                                             <Avatar source={{ uri: x.image }} />
-
-                                            <Box style={styles.body}>
-
+                                            <View style={styles.body}>
                                                 <Text>{x.name}</Text>
-
-
                                                 <Text>$ {x.price}</Text>
-
-                                            </Box>
+                                            </View>
                                         </List>
                                     );
                                 })}
                             </>
                         )}
                     </View>
-                ) : null}
+                ) : <View>
+                    <Text style={{ marginTop: '40%', color: 'red', fontWeight: '500' }}>No order information yet.</Text></View>}
                 <View style={{ alignItems: "center", margin: 20 }}>
                     <Button title={"Place order"} onPress={confirmOrder} />
                 </View>
